@@ -10,8 +10,8 @@ interface:
 
   mesh_bridge:
     address:
-      ipv4: '10.187.10.1/16'
-      ipv6: 'fd42:eb49:c0b5::ff00/48'
+      ipv4: '10.187.57.1/17'
+      ipv6: ' fd42:eb49:c0b5:4242::fd07/64'
     dhcp_range:
       start: 10.187.10.10
       end:   10.187.10.254
