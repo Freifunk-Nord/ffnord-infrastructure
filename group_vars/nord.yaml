@@ -31,4 +31,4 @@ site:
     git: https://github.com/Freifunk-Nord/nord-noc-sshkeys.git
 
 batman:
-  version: 2013.4.0-11
+  version_min: 2015
