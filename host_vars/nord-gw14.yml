@@ -2,6 +2,8 @@
 interface:
   wan:
     name: eth0
+    gateway:
+      ipv4: 172.31.1.1
     address:
       ipv4: 159.69.211.48
 
@@ -11,10 +13,10 @@ interface:
   mesh_bridge:
     address:
       ipv4: '10.187.57.1/17'
-      ipv6: ' fd42:eb49:c0b5:4242::fd07/64'
+      ipv6: ' fd42:eb49:c0b5:4242::fd14/64'
     dhcp_range:
-      start: 10.187.10.10
-      end:   10.187.10.254
+      start: 10.187.57.2
+      end:   10.187.60.254
 
 mesh_vpn:
   key:

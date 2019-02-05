@@ -47,4 +47,4 @@ site:
 
 
 batman:
-  min_version: 2015
+  version_min: 2015
