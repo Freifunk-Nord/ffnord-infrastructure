@@ -1,9 +1,9 @@
 ---
 interface:
   wan:
-    name: ens3
+    name: eth0
     address:
-      ipv4: 100.100.10.1
+      ipv4: 159.69.211.48
 
   batman:
     mac: 'de:ad:be:ef:ff:00'
