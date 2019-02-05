@@ -13,7 +13,6 @@
     - convenience
     - gateway
     - mesh_vpn
-    - mesh_vpn_ci_access
     - mesh_gre
     - bgp4 # Required for default route distribution
     - role: firewall_mss_clamp

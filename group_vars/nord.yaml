@@ -5,7 +5,7 @@ site:
   mesh:
     network:
       ipv4: 10.187.128.0/17
-      ipv6: fd42:eb49:c0b5::/48
+      ipv6: fd42:eb49:c0b5:4242::/64
     network_dynamic_clients: # optional, defaults to network.ipv6
       ipv6: fd42:eb49:c0b5:4242::/64
 
@@ -28,7 +28,7 @@ site:
       end:   65535
 
   bgp:
-    as: 65525
+    as: 65187
 
   dns:
     ffnord:
