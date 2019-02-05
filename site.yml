@@ -11,7 +11,6 @@
     - noc_keys
     - gateway
     - mesh_vpn
-    - mesh_vpn_ci_access
     - mesh_gre
     - bgp4 # Required for default route distribution
     - gateway_mss_clamp
