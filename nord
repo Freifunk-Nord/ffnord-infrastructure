@@ -4,5 +4,8 @@ nord-gw14
 [gateways]
 nord-gw14
 
+[hetzner_cloud]
+nord-gw14
+
 [local_exit4]
 nord-gw14
