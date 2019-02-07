@@ -21,3 +21,12 @@ The following limitations apply to the ansible roles in this repository:
 3. call ansible, e.g.:
 
        ansible-playbook -i nord site.yml -t gateway --limit nord-gw14
+
+# update this repository
+
+This repository uses submodules wich contian some global scripts `ffki-scripts` 
+and the variables per host in `nord-ansible-host-vars` which contain confidential
+data. Update the repository and all submodules with:
+
+    git pull
+    git uptate submodules

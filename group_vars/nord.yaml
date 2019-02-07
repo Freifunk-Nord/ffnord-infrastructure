@@ -12,7 +12,7 @@ site:
   mesh_vpn:
     peer_limit: 300 # optional, defaults to no limit
     mtu: 1280
-    key_git: https://github.com/Freifunk-Nord/nord-gw-peers.git
+    key_git: https://github.com/Freifunk-Nord/nord-gw-peers-public
     port: 10050
     verify: no # optional, defaults to yes
     #ci_deploy_key: ''
