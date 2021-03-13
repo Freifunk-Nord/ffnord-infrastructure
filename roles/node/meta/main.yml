@@ -1,3 +1,5 @@
 ---
 dependencies:
   - { role: batman_adv_dkms }
+  - { role: bird4 }
+  - { role: bird6 }
