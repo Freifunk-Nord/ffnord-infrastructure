@@ -1,4 +1,4 @@
-FFKI Ansible Documentation
+Nord Ansible Documentation
 ==========================
 
 This is the documentation for the automated ansible setup of Freifunk Kiel.
@@ -25,7 +25,7 @@ The following limitations apply to the ansible roles in this repository:
 
 # update this repository
 
-This repository uses submodules which contian some global scripts `ffki-scripts` 
+This repository uses submodules which contian some global scripts `ffki-scripts`
 and the variables per host in `nord-ansible-host-vars` which contain confidential
 data. Update the repository and all submodules with:
 
@@ -38,7 +38,7 @@ data. Update the repository and all submodules with:
 
       in this submodule the secret keys are defined. The repository is not public, so
       this whole ansible config wil only wrk, if you define your own hosts there
- 
+
  - `roles`
 
       see [/docs/roles/README.md](/docs/roles/README.md)

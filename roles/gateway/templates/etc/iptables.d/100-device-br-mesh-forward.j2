@@ -1,3 +1,2 @@
-# Forward packages from device br-ffki
+# Forward packages from device br-{{ site.code }}
 ip46tables -A forward -i br-{{ site.code }} -j mesh-forward
-

@@ -1,2 +1,2 @@
-# Process packages from device br-ffki
+# Process packages from device br-{{ site.code }}
 ip46tables -A input -i br-{{ site.code }} -j mesh-input
