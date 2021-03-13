@@ -71,8 +71,8 @@ mesh_vpn:
 mesh_gre:
   # List of hostnames to peer with, must match ansible hostnames
   peers:
-    - ffki-gw1
-    - ffki-gw6
+    - nord-gw1
+    - nord-gw3
 
 # optional, GRE + BGP peering configuration
 peering:
@@ -80,7 +80,7 @@ peering:
   ffnw:
     # peering site specification, use IATA 3-letter code + counter here (fra_a, fra_b, fra_c ...)
     ber_a:
-      # transit network point to point specification, local address is assigned to local endpoint of GRE tunnel, remote address is used for BGP peering 
+      # transit network point to point specification, local address is assigned to local endpoint of GRE tunnel, remote address is used for BGP peering
       transit:
         local: 100.100.96.43/31
         remote: 100.100.96.42/31
@@ -94,6 +94,19 @@ peering:
 
 # Deployment
 
-Deployment of all gateways is realized by running `ansible-playbook -b -K -i ffki -t gateway site.yml`
+Deployment of all gateways is realized by running
 
-If you wish to deploy only one gateway in particular use `ansible-playbook -b -K -i ffki -t gateway site.yml --limit <hostname>`
+    ansible-playbook --become --ask-become-pass --inventory nord --tags gateway site.yml --check
+
+This is a dry-run at first, if everything runs fine remove the `--check`
+
+If you wish to deploy only one tag only on all gateways
+
+    ansible-playbook --become --ask-become-pass --inventory nord --tags <some_tag> site.yml --limit gateways
+
+If you wish to deploy only one gateway in particular use
+
+    ansible-playbook --become --ask-become-pass --inventory nord --tags gateway site.yml --limit <hostname>
+
+The hostnames defined in the inventory file `nord` (e.g. `nord-gw0`).  
+**Note:** you have to set the aliases of all hosts in your `~/.ssh/config`

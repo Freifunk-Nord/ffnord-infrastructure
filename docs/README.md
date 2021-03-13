@@ -1,7 +1,7 @@
 FFKI Ansible Documentation
 ==========================
 
-This is the docuemnetation for the automated ansible setup of Freifunk Kiel.
+This is the documentation for the automated ansible setup of Freifunk Kiel.
 
 Documentation is split up into multiple parts:
  - Site setup: site.md
@@ -21,12 +21,28 @@ The following limitations apply to the ansible roles in this repository:
 3. call ansible, e.g.:
 
        ansible-playbook -i nord site.yml -t gateway --limit nord-gw14
+  (see "usage")
 
 # update this repository
 
-This repository uses submodules wich contian some global scripts `ffki-scripts` 
+This repository uses submodules which contian some global scripts `ffki-scripts` 
 and the variables per host in `nord-ansible-host-vars` which contain confidential
 data. Update the repository and all submodules with:
 
     git pull
     git uptate submodules
+
+# configuration:
+
+ - `nord_host_vars`
+
+      in this submodule the secret keys are defined. The repository is not public, so
+      this whole ansible config wil only wrk, if you define your own hosts there
+ 
+ - `roles`
+
+      see [/docs/roles/README.md](/docs/roles/README.md)
+
+# usage
+
+See [gateway.md](gateway.md) and [site.md](site.md)
