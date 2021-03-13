@@ -1,5 +1,5 @@
 [Unit]
-Description="Build ffki firewall rules"
+Description="Build firewall rules"
 
 [Service]
 Type=oneshot
