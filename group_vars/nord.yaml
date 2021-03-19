@@ -19,7 +19,7 @@ site:
 
   site_l3:
     network:
-      ipv4: 10.116.0.0/19
+      ipv4: 10.187.0.0/19
       ipv6: ::/0
 
   wireguard:
@@ -32,7 +32,7 @@ site:
 
   dns:
     ffnord:
-      git: https://github.com/Freifunk-Nord/nord-zone.git
+      git: https://github.com/Freifunk-Nord/nord-zone-bat15.git
       servers:
         - 127.0.0.1@5300
         - ::1@5300
@@ -42,7 +42,7 @@ site:
 
   mirror:
     firmware:
-      source: rsync://10.116.250.1/freifunk_firmware_ffki
+      source: rsync://10.187.250.1/freifunk_firmware_nord
       dir: firmware
 
 

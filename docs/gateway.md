@@ -38,15 +38,15 @@ interface:
     # Address configuration of the primary L2 mesh interface
     address:
       # IPv4 address assigned to this gateway
-      ipv4: '10.116.160.1/16'
+      ipv4: '10.187.160.1/16'
 
       # IPv6 address assigned to this gateway
       ipv6: 'fda1:384a:74de:4242::ff00/48'
 
     # Range of addresses assigned to clients by this gateway
     dhcp_range:
-      start: 10.116.160.2
-      end:   10.116.167.254
+      start: 10.187.160.2
+      end:   10.187.167.254
 
     # optional, required if ffnw IPv6 peering is enabled on this gateway
     ffnw:

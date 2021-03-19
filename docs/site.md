@@ -27,7 +27,7 @@ site:
   mesh:
     network:
       # IPv4 address space of your mesh
-      ipv4: 10.116.0.0/16
+      ipv4: 10.187.0.0/16
 
       # IPv6 ULA of your mesh
       ipv6: fda1:384a:74de::/48

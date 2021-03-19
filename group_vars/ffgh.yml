@@ -20,8 +20,8 @@ site:
     as: 65525
 
   dns:
-    ffki:
-      git: git://git.freifunk.in-kiel.de/ffki-zone.git
+    ffnord:
+      git: git@github.com:Freifunk-Nord/nord-zone.git
       servers:
         - 127.0.0.1@5300
         - ::1@5300
