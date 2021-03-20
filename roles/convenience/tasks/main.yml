@@ -8,7 +8,6 @@
       - vim
       - tcpdump
       - dnsutils
-      - realpath
       - screen
       - htop
       - mlocate

@@ -1,7 +1,7 @@
 ---
 site:
   code: ffnord
-  tld:  ffnord # optional, defaults to code
+  tld:  nord # optional, defaults to code
   mesh:
     network:
       ipv4: 10.187.0.0/17
