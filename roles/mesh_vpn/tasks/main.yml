@@ -32,7 +32,7 @@
 # Config
 - name: Ensure fastd peer directory exists
   file:
-    path: "/etc/fastd/mvpn-{{ site.code }}/peers"
+    path: "/etc/fastd/{{ site.code }}/peers"
     state: directory
   notify:
     - restart fastd
@@ -41,7 +41,7 @@
 - name: Ensure fastd config exists
   template:
     src: etc/fastd/mvpn/fastd.conf.j2
-    dest: "/etc/fastd/mvpn-{{ site.code }}/fastd.conf"
+    dest: "/etc/fastd/{{ site.code }}/fastd.conf"
   notify:
     - restart fastd
   tags: mesh_vpn
@@ -106,7 +106,7 @@
 
 - name: Ensure fastd service is enabled and started
   service:
-    name: fastd.service
+    name: fastd@{{ site.code }}.service
     enabled: yes
     state: started
   tags: mesh_vpn
