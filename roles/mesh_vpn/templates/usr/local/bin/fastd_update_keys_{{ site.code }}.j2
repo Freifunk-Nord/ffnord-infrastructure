@@ -14,7 +14,7 @@ KEY_GIT_BRANCH='{{ site.mesh_vpn.key_git_branch }}'
 KEY_GIT_BRANCH=master
 {% endif %}
 KEY_GIT_DIRECTORY='/opt/fastd-peer-keys-{{ site.code }}'
-KEY_DIRECTORY='/etc/fastd/mvpn-{{ site.code }}/peers'
+KEY_DIRECTORY='/etc/fastd/{{ site.code }}/peers'
 
 [ -e "$KEY_DIRECTORY" ] || error "FATAL: Key directory '$KEY_DIRECTORY' does not exist"
 
