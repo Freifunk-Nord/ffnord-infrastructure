@@ -37,7 +37,7 @@ data. Update the repository and all submodules with:
  - `nord_host_vars`
 
       in this submodule the secret keys are defined. The repository is not public, so
-      this whole ansible config wil only wrk, if you define your own hosts there
+      this whole ansible config wil only work, if you define your own hosts there
 
  - `roles`
 
