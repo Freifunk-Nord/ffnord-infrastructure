@@ -1,3 +1,0 @@
-# Allow Service fastd
-ip46tables -A wan-input -p udp -m udp --dport {{ site.mesh_vpn.port }} -j ACCEPT -m comment --comment 'fastd'
-

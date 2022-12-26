@@ -1,3 +1,0 @@
-# Drop all packages which are not ACCEPTed to this point
-ip46tables -A FORWARD -j DROP
-ip46tables -A forward -j DROP

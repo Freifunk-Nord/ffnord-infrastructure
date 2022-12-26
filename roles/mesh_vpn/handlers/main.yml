@@ -1,5 +1,0 @@
----
-- name: restart fastd
-  service:
-    name: fastd@{{ site.code }}
-    state: restarted

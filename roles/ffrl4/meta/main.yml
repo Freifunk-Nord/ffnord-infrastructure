@@ -1,4 +1,0 @@
----
-dependencies:
-  - { role: ffrl }
-  - { role: bgp4 }

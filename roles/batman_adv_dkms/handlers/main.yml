@@ -1,4 +1,0 @@
-- name: restart batman if available
-  shell: |
-    ifdown bat-{{ site.code }} || ip link set down bat-{{ site.code }} || true
-    ifup bat-{{ site.code }} || true

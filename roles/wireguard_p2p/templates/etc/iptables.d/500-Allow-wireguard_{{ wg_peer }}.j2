@@ -1,2 +1,0 @@
-# Allow wireguard traffic from {{ wg_peer }}
-ip46tables -A wan-input -p udp --dport {{ wg_local_port }} -j ACCEPT

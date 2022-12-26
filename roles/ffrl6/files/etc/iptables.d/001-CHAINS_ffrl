@@ -1,3 +1,0 @@
-# IPv6 ffrl peering chains
-
-ip6tables -N ffrl-forward

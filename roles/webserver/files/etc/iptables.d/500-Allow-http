@@ -1,2 +1,0 @@
-# Allow HTTP traffic
-ip46tables -A mesh-input -p tcp --dport 80 -j ACCEPT -m comment --comment "apache2 (HTTP)"
