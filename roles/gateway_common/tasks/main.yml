@@ -1,0 +1,12 @@
+---
+
+- name: base config
+  tags: [base]
+  import_tasks: base.yml
+
+- name: install packages
+  tags: [software, base, apt]
+  import_tasks: software.yml
+
+- import_tasks: units.yml
+  tags: [base, units]

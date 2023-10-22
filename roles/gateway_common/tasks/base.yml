@@ -1,0 +1,54 @@
+---
+
+- name: copy base configs (directories)
+  tags: [etc]
+  notify:
+    - reload systemd
+    - reload sysctl
+    - restart journald
+  file:
+    state: directory
+    path: '/etc/{{ item.path }}'
+  with_community.general.filetree: etc/
+  when: item.state == 'directory'
+
+- name: copy base configs (files)
+  tags: [etc]
+  notify:
+    - reload systemd
+    - reload sysctl
+    - restart journald
+  copy:
+    src: '{{ item.src }}'
+    dest: '/etc/{{ item.path }}'
+  with_community.general.filetree: etc/
+  when: item.state == 'file'
+
+
+- name: Disable password login
+  tags: [base]
+  notify: restart sshd
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    line: "PasswordAuthentication no"
+
+
+# configurations and stuff
+- name: set local timezone
+  file:
+    state: link
+    src: /usr/share/zoneinfo/Europe/Berlin
+    dest: /etc/localtime
+
+- name: set locales
+  tags: [base]
+  notify: generate locales
+  block:
+    - name: enable en_US locals
+      lineinfile:
+        dest: /etc/locale.gen
+        line: "en_US.UTF-8 UTF-8"
+    - name: enable de_DE locals
+      lineinfile:
+        dest: /etc/locale.gen
+        line: "de_DE.UTF-8 UTF-8"

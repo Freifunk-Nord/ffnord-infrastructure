@@ -1,0 +1,50 @@
+---
+
+
+- name: remove packages that are not needed
+  apt:
+    update_cache: yes
+    state: absent
+    name:
+      - cron-apt
+      - mutt
+      - rsyslog
+      - molly-guard
+      - at
+      - resolvconf
+
+- name: install tools
+  apt:
+    autoremove: yes
+    update_cache: yes
+    state: latest
+    name:
+      # necessary packages
+      - batctl
+      - fastd
+      - git
+      - haveged
+      - iproute2
+      - iptables-persistent
+      - openssh-server
+      - prometheus-node-exporter
+      # - systemd-timesyncd causes dependency hell atm
+      # tools
+      - apt-file
+      - bridge-utils
+      - curl
+      - dnsutils
+      - htop
+      - iftop
+      - iperf3
+      - iputils-ping
+      - jq
+      # - molly-guard
+      - openssh-client
+      - python3-yaml
+      - socat
+      - tcpdump
+      - vim
+      - wget
+      - rsync
+      - nmap
