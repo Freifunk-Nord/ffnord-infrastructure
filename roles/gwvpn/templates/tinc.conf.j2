@@ -1,0 +1,7 @@
+Name = {{ inventory_hostname | regex_replace('-', '_') }}
+Mode = switch
+LogLevel = 4
+
+{% for gw in groups['gateways'] | difference(inventory_hostname) %}
+ConnectTo = {{ gw | regex_replace('-', '_') }}
+{% endfor %}

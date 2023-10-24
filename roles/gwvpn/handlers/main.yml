@@ -1,0 +1,11 @@
+---
+
+- name: restart networkd
+  systemd:
+    state: restarted
+    name: systemd-networkd
+
+- name: restart tinc
+  systemd:
+    state: restarted
+    name: tinc.service

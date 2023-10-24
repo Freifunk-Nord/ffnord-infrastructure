@@ -1,0 +1,7 @@
+[Match]
+Name = {{ ansible_default_ipv4.interface }}
+
+[Network]
+{% for gw in groups['gateways'] | difference(inventory_hostname) %}
+Tunnel = gwvpn_{{ "%02d" | format(hostvars[gw].gwid) }}
+{% endfor %}

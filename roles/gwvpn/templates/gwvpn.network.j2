@@ -1,0 +1,12 @@
+[Match]
+Name = gwvpn
+
+[Network]
+IPv6AcceptRA = no
+LinkLocalAddressing = ipv6
+
+[Address]
+Address = {{ gwvpn_network | ipaddr(gwid) | ipaddr('address') }}/24
+
+[Address]
+Address = {{ gwvpn_network_ula | ipaddr(gwid) | ipaddr('address') }}/64

@@ -1,0 +1,6 @@
+{{ lookup('file', 'gwvpn/{{ item }}.pub') }}
+
+Address = {{ hostvars[item]['ansible_default_ipv4']['address'] }}
+
+{# Cipher = none #}
+{# Digest = none #}

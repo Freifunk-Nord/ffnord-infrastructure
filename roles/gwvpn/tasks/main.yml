@@ -1,0 +1,67 @@
+---
+
+
+- name: Install tinc
+  apt:
+    state: present
+    name:
+    - tinc
+
+
+- name: Create tinc config directory
+  file:
+    state: directory
+    path: /etc/tinc/gwvpn/
+
+
+- name: Apply tinc.conf template
+  notify: restart tinc
+  template:
+    src: tinc.conf.j2
+    dest: /etc/tinc/gwvpn/tinc.conf
+
+
+- name: Create tinc peer directory
+  file:
+    state: directory
+    path: /etc/tinc/gwvpn/hosts
+
+
+- name: Create tinc peer configs
+  notify: restart tinc
+  template:
+    src: tinc_peer.j2
+    dest: "/etc/tinc/gwvpn/hosts/{{ item | regex_replace('-', '_') }}"
+  loop: "{{ groups['gateways'] }}"
+
+
+- name: Copy tinc keys
+  notify: restart tinc
+  copy:
+    src: "gwvpn/{{ inventory_hostname }}.{{ item }}"
+    dest: "/etc/tinc/gwvpn/rsa_key.{{ item }}"
+  loop:
+    - priv
+    - pub
+
+- name: Apply gwvpn network config
+  notify: restart networkd
+  template:
+    src: gwvpn.network.j2
+    dest: "/etc/systemd/network/40-gwvpn.network"
+
+
+- name: Enable gwvpn service
+  notify: restart tinc
+  systemd:
+    enabled: true
+    name: tinc@gwvpn.service
+
+
+- name: clean old networkd files
+  file:
+    state: absent
+    path: "{{ item }}"
+  loop:
+    - /etc/systemd/network/40-gwvpn_tunnels.network
+    - /etc/systemd/network/40-gwvpn_tunnels.netdev
