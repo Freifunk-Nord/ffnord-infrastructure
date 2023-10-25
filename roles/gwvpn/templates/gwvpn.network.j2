@@ -5,8 +5,14 @@ Name = gwvpn
 IPv6AcceptRA = no
 LinkLocalAddressing = ipv6
 
-[Address]
-Address = {{ gwvpn_network | ipaddr(gwid) | ipaddr('address') }}/24
+{% for domain in domain_networks %}
+{# VXLAN = gwvpn_{{ domain.handle }} #}
+VLAN = gwvpn_{{ domain.handle }}
+{% endfor %}
+
 
 [Address]
-Address = {{ gwvpn_network_ula | ipaddr(gwid) | ipaddr('address') }}/64
+Address = {{ gwvpn_network | ansible.utils.ipaddr(gwid) }}
+
+[Address]
+Address = {{ gwvpn_network_ula | ansible.utils.ipaddr(gwid) }}

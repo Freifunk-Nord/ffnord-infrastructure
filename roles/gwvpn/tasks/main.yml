@@ -58,6 +58,12 @@
     name: tinc@gwvpn.service
 
 
+- name: Enable systemd-networkd
+  systemd:
+    enabled: true
+    name: systemd-networkd
+
+
 - name: clean old networkd files
   file:
     state: absent

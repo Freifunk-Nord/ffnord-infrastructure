@@ -5,8 +5,6 @@ Kind = gretap
 MACAddress = de:ad:ca:{{ formatted_gwid }}:03:{{ "%02d" | format(hostvars[item].gwid) }}
 
 
-
-
 [Tunnel]
 Remote = {{ hostvars[item]['ansible_default_ipv4']['address'] }}
 Local = {{ ansible_default_ipv4.address }}
