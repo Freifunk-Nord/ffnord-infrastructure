@@ -1,0 +1,12 @@
+[Match]
+Name = bat_{{ item.handle }}
+
+[Network]
+{% if item.network is defined %}
+{% if item.network.ipv4 is defined %}
+Address = {{ item.network.ipv4 | ansible.utils.ipaddr(gwid) }}
+{% endif %}
+{% if item.network.ipv6 is defined %}
+Address = {{ item.network.ipv6 | ansible.utils.ipaddr(gwid) }}
+{% endif %}
+{% endif %}

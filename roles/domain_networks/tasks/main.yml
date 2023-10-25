@@ -1,0 +1,54 @@
+---
+
+- name: cleanup old files
+  import_tasks: cleanup.yml
+
+
+#
+# Tunnels
+##########
+
+- name: Apply VXLAN config (netdev)
+  notify: restart systemd-networkd
+  template:
+    src: overlay_vxlan.netdev.j2
+    dest: "/etc/systemd/network/41-gwvpn_{{ item.handle }}.netdev"
+  loop: "{{ domain_networks }}"
+
+
+- name: Create overlay network (network)
+  notify: restart systemd-networkd
+  template:
+    src: overlay_vxlan.network.j2
+    dest: "/etc/systemd/network/41-gwvpn_{{ item.handle }}.network"
+  loop: "{{ domain_networks }}"
+
+
+#
+# BATMAN
+#########
+
+- name: Create batman interfaces
+  notify: restart systemd-networkd
+  template:
+    src: bat.netdev.j2
+    dest: "/etc/systemd/network/42-bat_{{ item.handle }}.netdev"
+  loop: "{{ domain_networks }}"
+  when: "item.batman"
+
+
+# - name: Setup gre tunnels for batman
+#   notify: restart systemd-networkd
+#   template:
+#     src: gre.network.j2
+#     dest: "/etc/systemd/network/40-gre_{{ item.handle }}.network"
+#   loop: "{{ domain_networks }}"
+#   when: "item.batman"
+
+- name: Configure batman interface (network)
+  notify: restart systemd-networkd
+  template:
+    src: bat.network.j2
+    dest: "/etc/systemd/network/40-bat_{{ item.handle }}.network"
+  loop: "{{ domain_networks }}"
+  when: "item.batman"

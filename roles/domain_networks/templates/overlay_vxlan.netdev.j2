@@ -1,0 +1,13 @@
+[NetDev]
+Name = gwvpn_{{ item.handle }}
+Kind = vlan
+{# MTUBytes = 1378 #}
+{# MACAddress = de:ad:ca:{{ formatted_gwid }}:01:{{ "%02d" | format(hostvars[item[1]].gwid) }} #}
+
+[VLAN]
+Id = {{ item.vni }}
+
+{# [VXLAN] #}
+{# VNI = {{ item.vni }} #}
+{# Group = ff05::100 #}
+{# Local = {{ gwvpn_network_ula | ansible.utils.ipaddr(gwid) }} #}

@@ -1,0 +1,22 @@
+[Match]
+Name = gwvpn_{{ item.handle }}
+
+{# WHEN BATMAN #}
+{% if item.batman %}
+[Network]
+BatmanAdvanced = bat_{{ item.handle }}
+DHCP = no
+LinkLocalAddressing = no
+
+[Link]
+ARP = false
+
+{% else %}
+{# NO BATMAN #}
+[Network]
+LinkLocalAddressing = ipv6
+
+[Address]
+Address = {{ item.network.ipv4 | ansible.utils.ipaddr(gwid) }}
+
+{% endif %}

@@ -1,0 +1,27 @@
+---
+
+
+
+- name: get old gre-netdev files
+  tags: [test]
+  find:
+    paths: "/etc/systemd/network/"
+    patterns:
+      - "40-overlay_gre_*.netdev"
+      - "*gre_*.network"
+      - "10-wg0.*"
+      - "40-overlay_gre_*.network"
+  register: x
+
+
+- name: print files to remove
+  debug:
+    msg: "{{ x.files | map(attribute='path') }}"
+
+
+# - name: remove old files
+#   tags: [test]
+#   file:
+#     state: absent
+#     path: "{{ item }}"
+#   loop: "{{ x.files | map(attribute='path') }}"
