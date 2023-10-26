@@ -1,0 +1,21 @@
+---
+
+- name: Ensure gateways are set up
+  hosts: gateways
+  roles:
+    # - generate_netconfig
+    - role: check
+      tags: check
+      any_errors_fatal: true
+    - role: gateway_common
+      tags: [gateway_common, base, common]
+    - role: apt_upgrade
+      tags: [apt_upgrade, upgrade]
+    - role: gwvpn
+      tags: [gwvpn]
+    - role: gwvpn_domains
+      tags: [gwvpn_domains, gwvpn, domains]
+    - role: meshvpn
+      tags: [meshvpn]
+    - role: bird_common
+      tags: [bird]
