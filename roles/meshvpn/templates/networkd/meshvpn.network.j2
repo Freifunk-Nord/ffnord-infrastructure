@@ -1,0 +1,11 @@
+[Match]
+Name = mvpn_{{ item.name }}
+
+[Network]
+LinkLocalAddressing = no
+IPv6AcceptRA = no
+DHCP = no
+BatmanAdvanced = bat_{{ item.domain }}
+
+[Link]
+ARP = no

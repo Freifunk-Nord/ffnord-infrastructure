@@ -1,0 +1,134 @@
+---
+
+- name: install packages
+  apt:
+    update_cache: yes
+    state: present
+    name:
+      - batctl
+      - fastd
+      - iproute2
+
+
+- name: load batman-adv
+  modprobe:
+    name: batman-adv
+    state: present
+
+
+#
+# Network config
+#################
+
+- name: Copy meshvpn interface networkd configuration (network)
+  notify: restart networkd
+  loop: "{{ meshvpn_instances }}"
+  template:
+    src: networkd/meshvpn.network.j2
+    dest: "/etc/systemd/network/50-meshvpn_{{ item.name }}.network"
+
+
+#
+# fastd
+########
+
+- name: Create fastd user
+  user:
+    name: fastd
+    system: yes
+    home: /etc/fastd
+
+
+- name: Create fastd config dirs
+  loop: "{{ meshvpn_instances }}"
+  notify: restart meshvpn
+  file:
+    path: "/etc/fastd/mvpn_{{ item.name }}"
+    state: directory
+
+
+- name: Copy fastd config templates
+  loop: "{{ meshvpn_instances }}"
+  notify: restart meshvpn
+  template:
+    src: meshvpn/fastd.conf.j2
+    dest: "/etc/fastd/mvpn_{{ item.name }}/fastd.conf"
+    mode: '0640'
+
+
+# - name: create fastd-up script
+#   loop: "{{ meshvpn_instances }}"
+#   notify: restart meshvpn
+#   template:
+#     src: meshvpn/fastd-up.j2
+#     dest: "/etc/fastd/mvpn_{{ item.name }}/fastd-up"
+#     mode: 0755
+
+
+- name: Remove fastd up script
+  loop: "{{ meshvpn_instances }}"
+  notify: restart meshvpn
+  file:
+    state: absent
+    path: "/etc/fastd/mvpn_{{ item.name }}/fastd-up"
+
+
+
+# configure peers git
+# add update script
+# - name: copy update script
+#   notify: run meshvpn-keys update script
+#   template:
+#     src: mesh-vpn/update-meshvpn-keys.sh
+#     dest: /usr/local/lib/ffhl/
+#     mode: 0775
+
+
+# - name: install mesh-vpn peer update service
+#   notify: restart update-ffhl-meshvpn
+#   copy:
+#     src: systemd/
+#     dest: /etc/systemd/system/
+#     owner: root
+
+
+# - name: enable meshvpn peer update job
+#   systemd:
+#     enabled: yes
+#     name: update-ffhl-mesh-vpn.timer
+
+
+
+- name: Enable fastd instances
+  loop: "{{ meshvpn_instances }}"
+  systemd:
+    enabled: yes
+    name: "fastd@mvpn_{{ item.name }}"
+
+
+# download public keys to our local machine
+- name: create public key files
+  loop: "{{ meshvpn_instances }}"
+  shell:
+    creates: "/etc/fastd/mvpn_{{ item.name }}/pubkey.key"
+    cmd: "fastd --show-key -c /etc/fastd/mvpn_{{ item.name }}/fastd.conf > /etc/fastd/mvpn_{{ item.name }}/pubkey.key"
+
+- name: fetch public keys
+  loop: "{{ meshvpn_instances }}"
+  fetch:
+    src: "/etc/fastd/mvpn_{{ item.name }}/pubkey.key"
+    dest: artifacts/
+
+
+# - name: install fastd-exporter
+#   import_role:
+#     name: fastd-exporter
+
+
+
+- name: Remove old files
+  loop: "{{ meshvpn_instances }}"
+  notify: restart meshvpn
+  file:
+    state: absent
+    path: "/etc/fastd/mvpn_{{ item.name }}/fastd-up"

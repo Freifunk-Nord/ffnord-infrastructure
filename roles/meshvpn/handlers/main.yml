@@ -1,0 +1,33 @@
+---
+
+
+- name: run meshvpn-keys update script
+  command: /usr/local/lib/ffhl/update-meshvpn-keys.sh
+
+- name: restart meshvpn
+  loop: "{{ mesh_vpn_instances }}"
+  systemd:
+    name: "fastd@{{ item.name }}"
+
+- name: restart networkd
+  systemd:
+    name: systemd-networkd
+
+
+- name: restart update-ffhl-meshvpn
+  systemd:
+    daemon_reload: true
+    state: restarted
+    name: update-ffhl-meshvpn
+
+- name: restart dhcpd
+  when: exit_traffic
+  systemd:
+    state: restarted
+    name: isc-dhcp-server.service
+
+- name: stop dhcpd
+  when: exit_traffic
+  systemd:
+    state: stopped
+    name: isc-dhcp-server.service
