@@ -8,10 +8,10 @@
 # Tunnels
 ##########
 
-- name: Apply VXLAN config (netdev)
+- name: Apply VLAN config (netdev)
   notify: restart systemd-networkd
   template:
-    src: overlay_vxlan.netdev.j2
+    src: gwvpn_vlan.netdev.j2
     dest: "/etc/systemd/network/41-gwvpn_{{ item.handle }}.netdev"
   loop: "{{ domain_networks }}"
 

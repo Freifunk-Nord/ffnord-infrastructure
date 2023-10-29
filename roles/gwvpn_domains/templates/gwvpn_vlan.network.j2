@@ -1,6 +1,7 @@
 [Match]
 Name = gwvpn_{{ item.handle }}
 
+
 {# WHEN BATMAN #}
 {% if item.batman %}
 [Network]
@@ -10,8 +11,8 @@ LinkLocalAddressing = no
 
 [Link]
 ARP = false
-
 {% else %}
+
 {# NO BATMAN #}
 [Network]
 LinkLocalAddressing = ipv6
