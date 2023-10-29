@@ -19,7 +19,7 @@
 - name: Create overlay network (network)
   notify: restart systemd-networkd
   template:
-    src: overlay_vxlan.network.j2
+    src: gwvpn_vlan.network.j2
     dest: "/etc/systemd/network/41-gwvpn_{{ item.handle }}.network"
   loop: "{{ domain_networks }}"
 

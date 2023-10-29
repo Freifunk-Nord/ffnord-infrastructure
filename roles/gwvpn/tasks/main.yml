@@ -8,6 +8,10 @@
     - tinc
 
 
+#
+# Tinc
+#######
+
 - name: Create tinc config directory
   file:
     state: directory
@@ -43,6 +47,11 @@
   loop:
     - priv
     - pub
+
+
+#
+# network
+##########
 
 - name: Apply gwvpn network config
   notify: restart networkd

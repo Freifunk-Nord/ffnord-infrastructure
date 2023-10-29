@@ -6,7 +6,6 @@ IPv6AcceptRA = no
 LinkLocalAddressing = ipv6
 
 {% for domain in domain_networks %}
-{# VXLAN = gwvpn_{{ domain.handle }} #}
 VLAN = gwvpn_{{ domain.handle }}
 {% endfor %}
 
