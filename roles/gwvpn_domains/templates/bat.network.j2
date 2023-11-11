@@ -5,7 +5,7 @@ Name = bat_{{ item.handle }}
 {% if item.network is defined %}
 
 {% if item.network.ipv4 is defined %}
-Address = {{ item.network.ipv4 | ansible.utils.ipaddr(gwid) }}
+Address = {{ item.network.ipv4 | ansible.utils.ipaddr(gwid+10) }}
 {% endif %}
 
 {% if item.network.ipv6 is defined %}
@@ -16,18 +16,25 @@ Address = {{ item.network.ipv6 | ansible.utils.ipaddr(gwid) }}
 Address = {{ item.network.ipv6_ula | ansible.utils.ipaddr(gwid) }}
 {% endif %}
 
-
+DHCPServer = yes
 IPv6SendRA = yes
+
+{% if item.network.ipv4 is defined %}
+[DHCPServer]
+PoolOffset = 256
+DefaultLeaseTimeSec = 600
+{% endif %}
 
 {% if item.network.ipv6 is defined %}
 [IPv6Prefix]
 Prefix = {{ item.network.ipv6 }}
+PreferredLifetimeSec = 600
 {% endif %}
 
 {% if item.network.ipv6_ula is defined %}
 [IPv6Prefix]
 Prefix = {{ item.network.ipv6_ula }}
+PreferredLifetimeSec = 600
 {% endif %}
-
 
 {% endif %}

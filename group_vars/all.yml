@@ -1,2 +1,37 @@
 ippool:
   transfer: 'transfer'
+
+network_as: 201173
+network_public_v6: 2001:67c:2d50::/48
+network_private_v6: fdef:ffc0:3dd7::/48
+network_private_v4: 10.130.0.0/16
+
+gwvpn_network_ula: "fd61:9d34:4e2e::/48"
+gwvpn_network: "10.0.0.0/24"
+
+domain_networks:
+  - handle: ffhl
+    vni: 2
+    batman: true
+    network:
+      ipv4: 10.130.0.0/16
+      ipv6: 2001:67c:2d50::/48
+      ipv6_ula: fdef:ffc0:3dd7::/64
+  - handle: ffnord
+    vni: 3
+    batman: true
+    network:
+      ipv4: 10.187.16.0/20
+      ipv6_ula: fd26:891d:83a7:1::/64
+  - handle: ffiz
+    vni: 4
+    batman: true
+    network:
+      ipv4: 10.187.32.0/20
+      ipv6_ula: fd26:891d:83a7:2::/64
+  - handle: ffploh
+    vni: 5
+    batman: true
+    network:
+      ipv4: 10.187.48.0/20
+      ipv6_ula: fd26:891d:83a7:3::/64
