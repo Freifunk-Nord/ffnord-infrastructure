@@ -16,4 +16,18 @@ Address = {{ item.network.ipv6 | ansible.utils.ipaddr(gwid) }}
 Address = {{ item.network.ipv6_ula | ansible.utils.ipaddr(gwid) }}
 {% endif %}
 
+
+IPv6SendRA = yes
+
+{% if item.network.ipv6 is defined %}
+[IPv6Prefix]
+Prefix = {{ item.network.ipv6 }}
+{% endif %}
+
+{% if item.network.ipv6_ula is defined %}
+[IPv6Prefix]
+Prefix = {{ item.network.ipv6_ula }}
+{% endif %}
+
+
 {% endif %}
